@@ -35,9 +35,10 @@
   resize: vertical;
 }
 
+/* Full-strength muted (about 5:1): a placeholder is still text people must be able to read. */
 .control::placeholder {
   color: var(--color-text-muted);
-  opacity: 0.8;
+  opacity: 1;
 }
 
 @media (hover: hover) {
@@ -58,4 +59,53 @@
 .error {
   font-size: var(--text-sm);
   color: var(--color-danger);
+}
+
+/*
+ * A field with an attached action (the submit button). DOM order stays
+ * label, hint, control, error, action, so on phones the error sits right under the
+ * control and the action stacks last. From 40rem the action moves beside the control
+ * and the error drops beneath both.
+ */
+.action {
+  display: flex;
+  margin-block-start: var(--space-3);
+}
+
+.action > * {
+  flex: 1;
+}
+
+@media (min-width: 40rem) {
+  .hasAction {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: var(--space-3);
+  }
+
+  .hasAction > .label,
+  .hasAction > .hint,
+  .hasAction > .error {
+    flex: 0 0 100%;
+  }
+
+  .hasAction > .control {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+  }
+
+  /* The button sits level with the control and shares its height; it keeps its natural width. */
+  .hasAction > .action {
+    order: 2;
+    margin-block-start: 0;
+  }
+
+  .hasAction > .action > * {
+    flex: none;
+  }
+
+  .hasAction > .error {
+    order: 3;
+  }
 }

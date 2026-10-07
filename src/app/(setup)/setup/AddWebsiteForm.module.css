@@ -1,0 +1,43 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 28rem;
+}
+
+/* Room for the input and the button to share a row without squeezing the input. */
+@media (min-width: 40rem) {
+  .form {
+    max-width: 36rem;
+  }
+}
+
+.manual {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin-block-start: calc(var(--space-2) * -1);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* Reads as a quiet inline link next to "No website?", not a second button. */
+.manual .manualButton {
+  padding-inline: var(--space-2);
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* Reserve nothing when empty so the form stays calm. */
+.status:empty {
+  display: none;
+}
+
+.status {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  text-wrap: pretty;
+}

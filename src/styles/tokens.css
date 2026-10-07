@@ -42,6 +42,7 @@
   --text-md: 1.0625rem;
   --text-lg: 1.25rem;
   --text-xl: 1.625rem;
+  --text-title: clamp(1.875rem, 1.15rem + 2.4vw, 2.95rem); /* onboarding step titles: 30px phones, ~47px large desktop; important, not a hero */
   --text-2xl: clamp(2rem, 1.5rem + 2.2vw, 3.125rem); /* mobile unchanged; 50px from ~1250px up */
 
   --leading-tight: 1.15;

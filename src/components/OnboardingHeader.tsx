@@ -1,11 +1,11 @@
 import { PRODUCT_NAME } from '@/lib/brand';
 
-import { AssistantMark } from './AssistantMark';
 import { Container } from './Container';
 import styles from './OnboardingHeader.module.css';
 
 /**
- * Setup header (DESIGN.md section 17): brand, current task, quiet progress.
+ * Setup header (DESIGN.md section 17): wordmark as text only, current task, quiet progress.
+ * The assistant-presence mark lives in the page content, not here, so it is never duplicated.
  * Deliberately no product navigation. Not used by any route until Milestone 2.
  */
 export function OnboardingHeader({ step, total }: { step?: number; total?: number }) {
@@ -13,10 +13,7 @@ export function OnboardingHeader({ step, total }: { step?: number; total?: numbe
   return (
     <header className={styles.header}>
       <Container size="wide" className={styles.bar}>
-        <span className={styles.brand}>
-          <AssistantMark size={26} />
-          <span className={styles.wordmark}>{PRODUCT_NAME}</span>
-        </span>
+        <span className={styles.wordmark}>{PRODUCT_NAME}</span>
         {hasProgress ? (
           <p className={styles.progress}>
             <span>

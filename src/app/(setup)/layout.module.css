@@ -1,0 +1,14 @@
+.main {
+  padding-block: var(--space-7) var(--space-9);
+}
+
+.main:focus {
+  outline: none;
+}
+
+/* Let the task sit a little below the header on tall screens instead of hugging it. */
+@media (min-width: 40rem) {
+  .main {
+    padding-block: clamp(var(--space-7), 11vh, 7rem) var(--space-9);
+  }
+}

@@ -1,0 +1,29 @@
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding-block-end: var(--space-6);
+}
+
+/* The assistant, present but quiet. */
+.mark {
+  color: var(--color-moss);
+  margin-block-end: var(--space-2);
+}
+
+/* The assistant speaking: serif. Important, but this is product onboarding, not a hero. */
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-title);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.lede {
+  max-width: 28rem;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
