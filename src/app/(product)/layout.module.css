@@ -1,0 +1,13 @@
+.main {
+  padding-block: var(--space-7) var(--space-9);
+}
+
+.main:focus {
+  outline: none;
+}
+
+@media (min-width: 40rem) {
+  .main {
+    padding-block: var(--space-8) var(--space-9);
+  }
+}

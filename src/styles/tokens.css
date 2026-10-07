@@ -1,0 +1,95 @@
+/*
+ * Design tokens. Source: DESIGN.md ("Colleague x Paper").
+ *
+ * Values DESIGN.md gives (approximate hex): bg, text, text-muted, moss, and the
+ * 6px / 8px radii. Everything else here (surface, border, ochre, tints, scales) is
+ * DERIVED to fit those values and should be reviewed, not treated as approved.
+ * Components use these tokens; they should not hardcode colours, radii or fonts.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Colour: surfaces */
+  --color-bg: #f7f5f1; /* DESIGN.md: warm off-white */
+  --color-surface: #fcfbf8; /* derived: a touch lighter than bg, for the few contained surfaces */
+  --color-border: #e6e2da; /* derived: hairline */
+  --color-border-strong: #cdc7bb; /* derived: inputs, secondary buttons */
+
+  /* Colour: text */
+  --color-text: #23211e; /* DESIGN.md: deep warm charcoal */
+  --color-text-muted: #6f6a63; /* DESIGN.md: muted warm gray (about 4.9:1 on bg) */
+
+  /* Colour: moss = active, ready, successful, primary positive action */
+  --color-moss: #57644a; /* DESIGN.md (about 5.8:1 on bg) */
+  --color-moss-strong: #4a563f; /* derived: hover / pressed */
+  --color-moss-tint: #e8ece0; /* derived: soft ring and background tint */
+  --color-on-moss: #fcfbf8;
+
+  /* Colour: ochre = the assistant needs help. Never used for real errors. */
+  --color-ochre: #b07d2b; /* derived: graphic use only (about 3.3:1), never for text */
+  --color-ochre-tint: #f3ead5; /* derived */
+
+  /* Colour: real errors and destructive actions only */
+  --color-danger: #9a3f2e; /* derived */
+
+  /* Typography */
+  --font-serif: var(--font-source-serif), 'Source Serif 4', Georgia, serif; /* assistant voice */
+  --font-sans: var(--font-figtree), 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif; /* interface */
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.625rem;
+  --text-2xl: clamp(2rem, 1.5rem + 2.2vw, 3.125rem); /* mobile unchanged; 50px from ~1250px up */
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-body: 1.55;
+
+  /* Spacing (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* Radii: restrained (DESIGN.md section 10). No pills. */
+  --radius-button: 6px;
+  --radius-input: 8px;
+  --radius-surface: 8px;
+
+  /* Layout */
+  --gutter: var(--space-4);
+  --width-wide: 70rem; /* header and page frame */
+  --width-reading: 40rem; /* core product content */
+  --touch-target: 2.75rem; /* 44px */
+
+  /* Elevation: very little (DESIGN.md section 11). Reserved for layered UI. */
+  --shadow-raised: 0 1px 2px rgb(35 33 30 / 0.06);
+
+  /* Focus */
+  --focus-ring: 2px solid var(--color-moss);
+  --focus-offset: 2px;
+
+  /* Motion: subtle, functional, immediate */
+  --duration-fast: 120ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 40rem) {
+  :root {
+    --gutter: var(--space-5);
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --gutter: var(--space-6);
+  }
+}

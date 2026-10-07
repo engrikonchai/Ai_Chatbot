@@ -1,0 +1,148 @@
+.header {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bar {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-3);
+  height: 3.5rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-moss);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.wordmark {
+  display: none;
+  color: var(--color-text);
+  font-size: var(--text-md);
+  letter-spacing: -0.005em;
+}
+
+.nav {
+  display: flex;
+  align-items: stretch;
+  margin-inline-start: var(--space-2);
+}
+
+.link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-inline: var(--space-3);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+/* Current page: full-strength text and a quiet moss line on the header hairline.
+   No box, no pill. Weight stays constant so the nav never shifts between pages. */
+.link[aria-current='page'] {
+  color: var(--color-text);
+}
+
+.link[aria-current='page']::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--space-3);
+  bottom: -1px;
+  height: 2px;
+  background: var(--color-moss);
+}
+
+@media (hover: hover) {
+  .link:hover {
+    color: var(--color-text);
+  }
+}
+
+/* Keyboard focus only. The ring hugs the label instead of the full-height link,
+   so it never reads as a tab or button. */
+.link:focus-visible {
+  outline: none;
+}
+
+.link:focus-visible::before {
+  content: '';
+  position: absolute;
+  inset: 0.75rem var(--space-1);
+  border: 2px solid var(--color-moss);
+  border-radius: var(--radius-button);
+}
+
+.brand:focus-visible {
+  outline-offset: 2px;
+  border-radius: var(--radius-button);
+}
+
+.profile {
+  display: grid;
+  place-items: center;
+  align-self: center;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  margin-inline-start: auto;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.profile[aria-current='page'] {
+  border-color: var(--color-moss);
+  color: var(--color-text);
+}
+
+@media (hover: hover) {
+  .profile:hover {
+    border-color: var(--color-text-muted);
+    color: var(--color-text);
+  }
+}
+
+/* Smallest phones: tighter spacing so all three areas and the profile fit on one row. */
+@media (max-width: 23.75rem) {
+  .bar {
+    gap: var(--space-2);
+  }
+
+  .nav {
+    margin-inline-start: 0;
+  }
+
+  .link {
+    padding-inline: var(--space-1);
+  }
+
+  .link[aria-current='page']::after {
+    inset-inline: var(--space-1);
+  }
+}
+
+@media (min-width: 40rem) {
+  .bar {
+    gap: var(--space-5);
+    height: 4rem;
+  }
+
+  .wordmark {
+    display: inline;
+  }
+
+  .nav {
+    margin-inline-start: var(--space-5);
+  }
+}

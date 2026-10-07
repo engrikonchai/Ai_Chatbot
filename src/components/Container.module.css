@@ -1,0 +1,21 @@
+.wide {
+  width: 100%;
+  max-width: var(--width-wide);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.reading {
+  width: 100%;
+  max-width: calc(var(--width-reading) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Large screens: start the column inside the page frame, not in the middle of the viewport. */
+@media (min-width: 64rem) {
+  .reading {
+    margin-inline-start: max(0px, calc((100% - var(--width-wide)) / 2 + var(--space-9)));
+    margin-inline-end: auto;
+  }
+}
