@@ -1,0 +1,38 @@
+/*
+ * Mirrors the intro treatment of the Add Website screen (../setup.module.css) on purpose,
+ * so the two steps read as one flow. Extract a shared component once a third step needs it.
+ */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding-block-end: var(--space-6);
+}
+
+.mark {
+  color: var(--color-moss);
+  margin-block-end: var(--space-2);
+}
+
+/* The assistant speaking: serif. */
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-title);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.lede {
+  max-width: 28rem;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+.site {
+  margin-block-start: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
