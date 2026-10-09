@@ -28,13 +28,12 @@ export default function LearningPage() {
         </span>
         <h1 className={styles.title}>Learning about your business...</h1>
         <p className={styles.lede}>
-          This usually only takes a moment. You can leave this page while we work.
+          We’re learning the basics from your website — your services, prices and policies.
         </p>
+        <p className={styles.site}>{demoLearning.site}</p>
       </div>
 
       <LearningSteps steps={demoLearning.steps} />
-
-      <p className={styles.site}>{demoLearning.site}</p>
     </Container>
   );
 }

@@ -31,8 +31,8 @@
   text-wrap: pretty;
 }
 
+/* Subtle and secondary: the site being read, between the copy and the steps. */
 .site {
-  margin-block-start: var(--space-6);
   font-size: var(--text-sm);
   color: var(--color-text-muted);
 }
