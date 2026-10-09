@@ -39,8 +39,8 @@ export const demoLearning = {
 export const demoAnalysisComplete = {
   learned: [
     { name: 'Business details', detail: 'Address, contact information and opening hours' },
-    { name: 'Services', detail: 'What the business offers' },
-    { name: 'Customer information', detail: 'The common details visitors are likely to ask about' },
+    { name: 'Services', detail: 'The services and options you offer' },
+    { name: 'Common questions', detail: 'The details visitors are most likely to ask about' },
   ],
   needsHelpCount: 3,
 } as const;
