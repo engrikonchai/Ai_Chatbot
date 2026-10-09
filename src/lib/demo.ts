@@ -1,5 +1,5 @@
 /**
- * DEMO DATA for the validation screens (Home, and the Learning state). No backend
+ * DEMO DATA for the validation screens (Home, Learning, Analysis complete). No backend
  * exists yet. Values come from the wireframes. Replace with real data when the data
  * layer exists; nothing else should import this.
  */
@@ -28,4 +28,19 @@ export const demoLearning = {
     { label: 'Checking prices and policies', state: 'current' },
     { label: 'Preparing your assistant', state: 'pending' },
   ],
+} as const;
+
+/**
+ * A representative, STATIC "analysis complete" state for /setup/analysis-complete.
+ * It is NOT the result of any scan: nothing here was extracted from a website, and
+ * nothing generates or changes it. A real scan will supply these summaries and the
+ * count of things that need the owner's help.
+ */
+export const demoAnalysisComplete = {
+  learned: [
+    { name: 'Business details', detail: 'Address, contact information and opening hours' },
+    { name: 'Services', detail: 'What the business offers' },
+    { name: 'Customer information', detail: 'The common details visitors are likely to ask about' },
+  ],
+  needsHelpCount: 3,
 } as const;

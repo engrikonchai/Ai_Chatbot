@@ -1,0 +1,94 @@
+/* Keeps hairlines and copy to a comfortable measure; the rest of the viewport stays empty. */
+.content {
+  max-width: 36rem;
+}
+
+/*
+ * The intro mirrors the Add Website and Learning screens on purpose so the steps read as
+ * one flow. A third copy now exists: extract a shared step-intro component next time
+ * those screens are touched.
+ */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding-block-end: var(--space-6);
+}
+
+.mark {
+  color: var(--color-moss);
+  margin-block-end: var(--space-2);
+}
+
+/* The assistant speaking: serif. */
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-title);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.lede {
+  max-width: 28rem;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+/* What I learned: plain rows divided by hairlines. No cards, no marks, no checklist. */
+.learned {
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-block: var(--space-4);
+  border-block-start: 1px solid var(--color-border);
+}
+
+.item:last-child {
+  border-block-end: 1px solid var(--color-border);
+}
+
+.name {
+  font-weight: 600;
+}
+
+.detail {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+/* The turn from "done" to "your attention": separated by whitespace, not a banner. */
+.help {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding-block-start: var(--space-7);
+}
+
+.helpTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  line-height: var(--leading-snug);
+  letter-spacing: -0.008em;
+}
+
+.helpLede {
+  max-width: 28rem;
+  margin-block-end: var(--space-3);
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+/* The action wrapper fills the width so the button can span it on phones. */
+.help > :last-child {
+  align-self: stretch;
+}
