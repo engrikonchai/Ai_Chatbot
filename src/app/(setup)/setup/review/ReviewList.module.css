@@ -1,0 +1,198 @@
+/* The count, in the assistant's voice. Same treatment as the turn on Analysis complete. */
+.summary {
+  padding-block-end: var(--space-5);
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  line-height: var(--leading-snug);
+  letter-spacing: -0.008em;
+}
+
+/* Questions separated by hairlines and whitespace. No cards. */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  padding-block: var(--space-6);
+  border-block-start: 1px solid var(--color-border);
+}
+
+.item:last-child {
+  border-block-end: 1px solid var(--color-border);
+}
+
+/* A settled item steps back to a single compact row. */
+.item.resolved {
+  padding-block: var(--space-4);
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* What the question is about: a quiet label, not a title. */
+.topic {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* The assistant asking: serif. */
+.says {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  text-wrap: pretty;
+}
+
+.note {
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-block-start: var(--space-2);
+}
+
+/*
+ * Phones: the primary action takes the free width; a secondary action keeps its natural
+ * size beside it. From 40rem every button keeps its natural size.
+ */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-block-start: var(--space-2);
+}
+
+.form .actions {
+  margin-block-start: 0;
+}
+
+.actions > :first-child {
+  flex: 1 1 auto;
+}
+
+@media (min-width: 40rem) {
+  .actions > :first-child {
+    flex: none;
+  }
+}
+
+/* Conflict choices: plain answers to pick from, not a settings form. */
+.choices {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.option {
+  display: inline-flex;
+  flex: 1 1 7.5rem;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--touch-target);
+  padding: var(--space-2) var(--space-5) var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-input);
+  background: var(--color-surface);
+  font-variant-numeric: lining-nums tabular-nums;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+@media (min-width: 40rem) {
+  .option {
+    flex: none;
+  }
+}
+
+@media (hover: hover) {
+  .option:hover {
+    border-color: var(--color-text-muted);
+  }
+}
+
+/* The native radio dot carries the state; the tint only reinforces it. */
+.option:has(:checked) {
+  border-color: var(--color-moss);
+  background: var(--color-moss-tint);
+}
+
+.radio {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  accent-color: var(--color-moss);
+  cursor: pointer;
+}
+
+/* Matches the shared field error. */
+.error {
+  margin-block-start: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+}
+
+/* Resolved: check, "Got it.", and what was settled. Fades in; no banner, no movement. */
+.done {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  animation: settle 180ms var(--ease-out);
+}
+
+.check {
+  flex: none;
+  margin-block-start: calc((var(--leading-snug) * var(--text-md) - 1.25rem) / 2);
+  stroke: var(--color-moss);
+}
+
+.doneText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.gotIt {
+  font-family: var(--font-serif);
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+}
+
+.answer {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
+}
+
+.answerTopic {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+  }
+}

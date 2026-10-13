@@ -1,5 +1,5 @@
 /**
- * DEMO DATA for the validation screens (Home, Learning, Analysis complete). No backend
+ * DEMO DATA for the validation screens (Home, Learning, Analysis complete, Review). No backend
  * exists yet. Values come from the wireframes. Replace with real data when the data
  * layer exists; nothing else should import this.
  */
@@ -43,4 +43,35 @@ export const demoAnalysisComplete = {
     { name: 'Common questions', detail: 'The details visitors are most likely to ask about' },
   ],
   needsHelpCount: 3,
+} as const;
+
+/**
+ * Three representative questions for /setup/review, one per interaction pattern:
+ * verify a fact, resolve a conflict, teach something missing. They are NOT the result
+ * of any scan; nothing was found on any website. `key` is for React state only and is
+ * never shown. A real knowledge system will supply these.
+ */
+export const demoReview = {
+  items: [
+    {
+      kind: 'verify',
+      key: 'airport-transfer',
+      topic: 'Airport transfer',
+      found: '€25 each way',
+      editLabel: 'Airport transfer price',
+    },
+    {
+      kind: 'choose',
+      key: 'check-in',
+      topic: 'Check-in time',
+      options: ['2:00 PM', '3:00 PM'],
+    },
+    {
+      kind: 'teach',
+      key: 'pets',
+      topic: 'Pets',
+      question: 'Do you allow pets?',
+      example: 'Yes, pets are welcome for an additional €10 per night.',
+    },
+  ],
 } as const;
