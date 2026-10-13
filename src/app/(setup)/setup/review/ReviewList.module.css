@@ -152,7 +152,7 @@
   color: var(--color-danger);
 }
 
-/* Resolved: check, "Got it.", and what was settled. Fades in; no banner, no movement. */
+/* Resolved: check, topic, and what was settled. Fades in; no banner, no movement. */
 .done {
   display: flex;
   align-items: flex-start;
@@ -173,9 +173,9 @@
   min-width: 0;
 }
 
-.gotIt {
-  font-family: var(--font-serif);
+.doneTopic {
   font-size: var(--text-md);
+  font-weight: 500;
   line-height: var(--leading-snug);
 }
 
@@ -184,11 +184,6 @@
   color: var(--color-text-muted);
   overflow-wrap: anywhere;
   text-wrap: pretty;
-}
-
-.answerTopic {
-  color: var(--color-text);
-  font-weight: 500;
 }
 
 @keyframes settle {

@@ -2,10 +2,12 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 
+import { AssistantMark } from '@/components/AssistantMark';
 import { Button } from '@/components/Button';
 import { Input, Textarea } from '@/components/Field';
 
 import styles from './ReviewList.module.css';
+import introStyles from './review.module.css';
 
 /*
  * UX VALIDATION ONLY, until the real knowledge system exists.
@@ -71,40 +73,54 @@ export function ReviewList({ items }: { items: readonly ReviewItem[] }) {
   }
 
   return (
-    <section aria-labelledby={headingId}>
-      <h2 id={headingId} className={styles.summary}>
-        {summaryLine(remaining)}
-      </h2>
+    <>
+      <div className={introStyles.intro}>
+        <span className={introStyles.mark}>
+          <AssistantMark size={20} />
+        </span>
+        <h1 className={introStyles.title}>Just a few things to check.</h1>
+        <p className={introStyles.lede}>
+          {remaining === 0
+            ? 'Thanks — I have what I need.'
+            : 'I understood most of your business. I just need your help with a few details.'}
+        </p>
+      </div>
 
-      {/* role="list" because list-style: none removes list semantics in some browsers. */}
-      <ul className={styles.list} role="list">
-        {items.map((item) => {
-          const answer = answers[item.key];
-          const isResolved = answer !== undefined;
-          return (
-            <li
-              key={item.key}
-              ref={(node) => {
-                if (node) rows.current.set(item.key, node);
-                else rows.current.delete(item.key);
-              }}
-              tabIndex={isResolved ? -1 : undefined}
-              className={`${styles.item} ${isResolved ? styles.resolved : ''}`}
-            >
-              {isResolved ? (
-                <Resolved topic={item.topic} answer={answer} />
-              ) : (
-                <Question item={item} onResolve={(value) => resolve(item.key, value)} />
-              )}
-            </li>
-          );
-        })}
-      </ul>
+      <section aria-labelledby={headingId}>
+        <h2 id={headingId} className={styles.summary}>
+          {summaryLine(remaining)}
+        </h2>
 
-      <p role="status" className="visually-hidden">
-        {announcement}
-      </p>
-    </section>
+        {/* role="list" because list-style: none removes list semantics in some browsers. */}
+        <ul className={styles.list} role="list">
+          {items.map((item) => {
+            const answer = answers[item.key];
+            const isResolved = answer !== undefined;
+            return (
+              <li
+                key={item.key}
+                ref={(node) => {
+                  if (node) rows.current.set(item.key, node);
+                  else rows.current.delete(item.key);
+                }}
+                tabIndex={isResolved ? -1 : undefined}
+                className={`${styles.item} ${isResolved ? styles.resolved : ''}`}
+              >
+                {isResolved ? (
+                  <Resolved topic={item.topic} answer={answer} />
+                ) : (
+                  <Question item={item} onResolve={(value) => resolve(item.key, value)} />
+                )}
+              </li>
+            );
+          })}
+        </ul>
+
+        <p role="status" className="visually-hidden">
+          {announcement}
+        </p>
+      </section>
+    </>
   );
 }
 
@@ -309,7 +325,10 @@ function TeachQuestion({ item, onResolve }: ItemProps<Teach>) {
   );
 }
 
-/** The compact settled state. The check is a shape, and the words carry the meaning. */
+/**
+ * The compact settled state: check, topic, answer. The check is a shape; screen readers
+ * hear "Resolved: Airport transfer, €25 each way." when the row takes focus.
+ */
 function Resolved({ topic, answer }: { topic: string; answer: string }) {
   return (
     <div className={styles.done}>
@@ -330,10 +349,12 @@ function Resolved({ topic, answer }: { topic: string; answer: string }) {
         />
       </svg>
       <div className={styles.doneText}>
-        <p className={styles.gotIt}>Got it.</p>
-        <p className={styles.answer}>
-          <span className={styles.answerTopic}>{topic}:</span> {answer}
+        <p className={styles.doneTopic}>
+          <span className="visually-hidden">Resolved: </span>
+          {topic}
+          <span className="visually-hidden">,</span>
         </p>
+        <p className={styles.answer}>{answer}</p>
       </div>
     </div>
   );
