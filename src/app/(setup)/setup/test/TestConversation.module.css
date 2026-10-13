@@ -1,0 +1,251 @@
+/* A little wider than the form steps, but still a focused column; the rest stays empty. */
+.content {
+  max-width: var(--width-reading);
+}
+
+/*
+ * The one bounded surface in onboarding: it stands in for the assistant visitors will
+ * meet. Hairline, warm paper, restrained radius. No shadow, no window chrome.
+ */
+.surface {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-surface);
+  background: var(--color-surface);
+}
+
+/* Quiet, private: a note in the margin, not a badge. */
+.mode {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-block-end: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.modeName {
+  font-weight: 600;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin: 0;
+  padding: var(--space-5) var(--space-4);
+  list-style: none;
+}
+
+/* Long answers and pasted URLs wrap inside the column instead of widening the page. */
+.assistant,
+.owner {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: min(100%, 30rem);
+  overflow-wrap: anywhere;
+}
+
+.assistant {
+  align-items: flex-start;
+  gap: var(--space-1);
+}
+
+.owner {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+/* The assistant speaking: serif at body size, on a slightly deeper paper. */
+.assistantText {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-surface);
+  background: var(--color-bg);
+  font-family: var(--font-serif);
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+  text-wrap: pretty;
+}
+
+.ownerText {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-surface);
+  background: var(--color-moss-tint);
+  line-height: var(--leading-snug);
+  text-wrap: pretty;
+}
+
+/* Present for every answer but never competing with it. */
+.notCorrect {
+  min-height: 2rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .notCorrect:hover {
+    color: var(--color-text);
+  }
+}
+
+/* Correction and teaching: compact, attached to the answer they belong to. */
+.fix {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-self: stretch;
+  margin-block-start: var(--space-1);
+}
+
+.fixActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.done {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2rem;
+  font-size: var(--text-sm);
+  animation: settle 180ms var(--ease-out);
+}
+
+.check {
+  flex: none;
+  stroke: var(--color-moss);
+}
+
+.composer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-3);
+  border-block-start: 1px solid var(--color-border);
+}
+
+/* Lightweight prompts: small, outlined, stepping back once the owner is typing. */
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.suggestion {
+  min-height: 2.25rem;
+  padding: var(--space-1) 0.625rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-button);
+  background: transparent;
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  text-align: start;
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .suggestion:hover {
+    border-color: var(--color-text-muted);
+  }
+}
+
+.send {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* Phones: a little less padding so the full placeholder fits beside Send at 320px. */
+.send > button {
+  padding-inline: var(--space-4);
+}
+
+/* Matches the shared field control; 17px keeps iOS Safari from zooming on focus. */
+.input {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: var(--touch-target);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-input);
+  background: var(--color-surface);
+  font-size: var(--text-md);
+  line-height: var(--leading-snug);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .input:hover {
+    border-color: var(--color-text-muted);
+  }
+}
+
+.input:focus-visible {
+  border-color: var(--color-moss);
+  outline-offset: 0;
+}
+
+.finish {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-block-start: var(--space-6);
+}
+
+/* Phones: the completion action takes the full width, like the other steps. */
+.finish > button {
+  align-self: stretch;
+}
+
+@media (min-width: 40rem) {
+  .messages {
+    padding: var(--space-5);
+  }
+
+  .mode,
+  .composer {
+    padding-inline: var(--space-5);
+  }
+
+  .input {
+    padding-inline: var(--space-4);
+  }
+
+  .send > button {
+    padding-inline: var(--space-5);
+  }
+
+  .finish > button {
+    align-self: flex-start;
+  }
+}
+
+.ready:empty {
+  display: none;
+}
+
+.ready {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+  }
+}
