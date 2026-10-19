@@ -133,7 +133,7 @@
   border-block-start: 1px solid var(--color-border);
 }
 
-/* Lightweight prompts: small, outlined, stepping back once the owner is typing. */
+/* Lightweight prompts for the untouched state only; removed after the first question. */
 .suggestions {
   display: flex;
   flex-wrap: wrap;

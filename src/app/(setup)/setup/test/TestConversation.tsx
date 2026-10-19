@@ -106,18 +106,28 @@ export function TestConversation() {
         </ol>
 
         <div className={styles.composer}>
-          <div className={styles.suggestions} role="group" aria-label="Suggested questions">
-            {demoTest.suggestions.map((question) => (
-              <button
-                key={question}
-                type="button"
-                className={styles.suggestion}
-                onClick={() => ask(question)}
-              >
-                {question}
-              </button>
-            ))}
-          </div>
+          {/*
+           * Suggestions help the owner start, then get out of the way: once the first
+           * question is sent they are gone and only the input remains. Clicking one removes
+           * the button that had focus, so focus moves to the input instead of the page.
+           */}
+          {messages.length === 0 ? (
+            <div className={styles.suggestions} role="group" aria-label="Suggested questions">
+              {demoTest.suggestions.map((question) => (
+                <button
+                  key={question}
+                  type="button"
+                  className={styles.suggestion}
+                  onClick={() => {
+                    ask(question);
+                    inputRef.current?.focus();
+                  }}
+                >
+                  {question}
+                </button>
+              ))}
+            </div>
+          ) : null}
 
           <form className={styles.send} onSubmit={handleSend} noValidate>
             <label htmlFor={inputId} className="visually-hidden">
