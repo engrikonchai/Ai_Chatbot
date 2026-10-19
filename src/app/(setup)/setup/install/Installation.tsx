@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 
-import { Button } from '@/components/Button';
+import { Button, ButtonLink } from '@/components/Button';
 import { demoInstall } from '@/lib/demo';
 
 import styles from './Installation.module.css';
@@ -12,8 +12,9 @@ import styles from './Installation.module.css';
  *
  * The snippet is REPRESENTATIVE DEMO CONTENT (see `demoInstall`): example.com is not a
  * real endpoint and pasting it installs nothing. "Copy code" uses the real clipboard,
- * so "Copied." is only shown when the copy actually happened. Nothing else here sends,
- * saves or detects anything: no requests, no storage.
+ * so "Copied." is only shown when the copy actually happened. "I'll install it later"
+ * goes on to Go Live. Nothing else here sends, saves or detects anything: no requests,
+ * no storage.
  */
 
 const COPIED = 'Copied.';
@@ -107,13 +108,13 @@ export function Installation() {
           <Button onClick={() => setNote('Installation checking isn’t connected yet.')}>
             Check installation
           </Button>
-          {/* TEMPORARY until Go Live exists: acknowledges the choice, does not navigate. */}
-          <Button
-            variant="quiet"
-            onClick={() => setNote('No problem. You can add it whenever you’re ready.')}
-          >
+          {/*
+           * Installing can wait (WIREFRAMES.md, "Allow Later Installation"): finish setup
+           * without it. Go Live claims nothing about installation, so this is honest.
+           */}
+          <ButtonLink variant="quiet" href="/setup/go-live">
             I’ll install it later
-          </Button>
+          </ButtonLink>
         </div>
         <div role="status" className={styles.status}>
           {note ? <p>{note}</p> : null}
