@@ -1,0 +1,130 @@
+/* A comfortable measure for code and steps; the rest of the viewport stays empty. */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+  max-width: 36rem;
+}
+
+/* The snippet is one of the few contained surfaces: hairline, warm paper, no chrome. */
+.snippet {
+  margin: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-surface);
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 40rem) {
+  .snippet {
+    padding: var(--space-4) var(--space-5);
+  }
+}
+
+.copyRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--space-4);
+  row-gap: var(--space-3);
+  margin-block-start: var(--space-3);
+}
+
+.copyStatus:empty {
+  display: none;
+}
+
+.copyStatus {
+  flex: 1 1 14rem;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+.copied {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text);
+}
+
+.check {
+  flex: none;
+  stroke: var(--color-moss);
+}
+
+.stepsTitle {
+  margin-block-end: var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+/* Three short steps; quiet numerals, no boxes. */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+/* The numeral hangs in the margin so a step with inline code still wraps as one sentence. */
+.list > li {
+  position: relative;
+  padding-inline-start: 2rem;
+  counter-increment: step;
+  text-wrap: pretty;
+}
+
+.list > li::before {
+  content: counter(step) '.';
+  position: absolute;
+  inset-inline-start: 0;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.finish {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Phones: the primary spans the width with the quiet path beneath it. */
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-2);
+}
+
+@media (min-width: 40rem) {
+  .actions {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-3);
+  }
+}
+
+.status:empty {
+  display: none;
+}
+
+.status {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}

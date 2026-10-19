@@ -36,6 +36,7 @@
   /* Typography */
   --font-serif: var(--font-source-serif), 'Source Serif 4', Georgia, serif; /* assistant voice */
   --font-sans: var(--font-figtree), 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif; /* interface */
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; /* derived: the install snippet only */
 
   --text-xs: 0.8125rem;
   --text-sm: 0.9375rem;

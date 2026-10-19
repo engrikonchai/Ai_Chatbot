@@ -1,6 +1,6 @@
 /**
  * DEMO DATA for the validation screens (Home, Learning, Analysis complete, Review, Test,
- * Widget).
+ * Widget, Install).
  * No backend exists yet. Values come from the wireframes. Replace with real data when the
  * data layer exists; nothing else should import this.
  */
@@ -87,6 +87,17 @@ export const demoWidget = {
   greeting: 'Hi! How can I help?',
   colour: '#57644a',
   position: 'right',
+} as const;
+
+/**
+ * REPRESENTATIVE installation content for /setup/install and /setup/install/verified.
+ * There is no embeddable script yet: example.com is a reserved demonstration domain,
+ * deliberately not a real endpoint, and pasting this snippet installs nothing. The
+ * real per-business snippet replaces it when the widget exists.
+ */
+export const demoInstall = {
+  snippet: '<script src="https://example.com/assistant.js"></script>',
+  site: 'example.com',
 } as const;
 
 /**
