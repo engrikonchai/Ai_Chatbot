@@ -13,6 +13,8 @@ export const metadata: Metadata = { title: 'Learning about your business' };
  * Onboarding step 2: Learning from website (WIREFRAMES.md, "Step 2 - Website Analysis").
  *
  * DEVELOPMENT / VISUAL VALIDATION STATE ONLY.
+ * Signed-in owners can open it (setup requires an account), but nothing here comes from
+ * or is saved to their business: it is the same representative state for everyone.
  * There is no scanning backend yet. This page renders one fixed, representative
  * in-progress state from `demoLearning`. Nothing advances it: no timers, no polling,
  * no navigation into or out of it, and /setup does not link here. Do not add any of

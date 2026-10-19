@@ -15,6 +15,8 @@ export const metadata: Metadata = { title: 'Just a few things to check' };
  * changes once every question is answered.
  *
  * DEVELOPMENT / INTERACTION VALIDATION STATE ONLY.
+ * Signed-in owners can open it (setup requires an account), but nothing here comes from
+ * or is saved to their business: it is the same representative state for everyone.
  * There is no knowledge system. The questions come from `demoReview`, a fixed
  * representative set, and answering them only changes React state in this tab (see
  * ReviewList). Nothing is saved or sent, and a refresh starts over. Analysis complete

@@ -13,6 +13,8 @@ export const metadata: Metadata = { title: 'Meet your assistant' };
  * or missing answer is fixed right here, inline.
  *
  * DEVELOPMENT / INTERACTION VALIDATION STATE ONLY.
+ * Signed-in owners can open it (setup requires an account), but nothing here comes from
+ * or is saved to their business: it is the same representative state for everyone.
  * There is no answer engine. Replies come from a fixed local lookup over `demoTest`
  * (see demo-answers), and corrections or teaching only change React state in this tab
  * (see TestConversation). Nothing is generated, saved or sent, and a refresh starts

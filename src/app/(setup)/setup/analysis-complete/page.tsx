@@ -17,6 +17,8 @@ function needsHelpLine(count: number) {
  * Onboarding step 3: Analysis complete (WIREFRAMES.md, "Analysis Success").
  *
  * DEVELOPMENT / VISUAL VALIDATION STATE ONLY.
+ * Signed-in owners can open it (setup requires an account), but nothing here comes from
+ * or is saved to their business: it is the same representative state for everyone.
  * There is no scanning backend. Everything here comes from `demoAnalysisComplete`, a
  * fixed representative state: it is not the result of any scan, nothing generates it,
  * and no screen links here (neither /setup nor /setup/learning leads here). Its one

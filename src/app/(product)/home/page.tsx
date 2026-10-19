@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
 import { Container } from '@/components/Container';
 import { Divider } from '@/components/Divider';
 import { StatusLine } from '@/components/StatusLine';
+import { destinationFor, requireBusiness } from '@/lib/data/business';
 import { demoHome, demoOwner } from '@/lib/demo';
 
 import styles from './home.module.css';
@@ -16,9 +18,18 @@ function plural(count: number, one: string, many: string) {
 /**
  * Home, normal state: "Everything is handled." (WIREFRAMES.md, default returning state).
  * A short report from the assistant, not a dashboard: state, one quiet outcome
- * sentence, a little recent activity. Demo data until the data layer exists.
+ * sentence, a little recent activity.
+ *
+ * Everything shown is still DEMO DATA ("Live on example.com", sample numbers), so a
+ * real owner only sees it once setup is genuinely complete; until then Home sends them
+ * back to setup instead of implying their assistant is live. onboarding_completed_at
+ * stays null until Phase 2 Part 2 makes the assistant real, and Home's data becomes
+ * real at the same time.
  */
-export default function HomePage() {
+export default async function HomePage() {
+  const business = await requireBusiness();
+  if (!business.onboarding_completed_at) redirect(destinationFor(business));
+
   const { greeting, site, week, recent } = demoHome;
 
   return (

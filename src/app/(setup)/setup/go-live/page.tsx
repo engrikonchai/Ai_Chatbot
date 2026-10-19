@@ -14,7 +14,10 @@ export const metadata: Metadata = { title: 'Your assistant is ready' };
  *
  * DEVELOPMENT / VALIDATION STATE.
  * Nothing is installed or live yet, so this page says "ready", not "live", and
- * promises nothing that depends on installation. "Go to Home" genuinely navigates.
+ * promises nothing that depends on installation. It is reached in the real flow from
+ * Installation ("I'll install it later") but does NOT set onboarding_completed_at:
+ * analysis, review and test are not real yet, so setup is not genuinely complete.
+ * "Go to Home" navigates for real; Home sends owners back to setup until completion.
  *
  * Intended copy once installation is verified for real (SCREENS.md section 13):
  *   Your assistant is live.
