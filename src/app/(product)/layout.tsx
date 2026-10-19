@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 
 import { ProductHeader } from '@/components/ProductHeader';
-import { demoOwner } from '@/lib/demo';
+import { requireUser } from '@/lib/auth/session';
+import { requireBusiness } from '@/lib/data/business';
+import { getCurrentProfile } from '@/lib/data/profile';
 
 import styles from './layout.module.css';
 
@@ -12,11 +14,15 @@ export const metadata: Metadata = {
 };
 
 // Post-onboarding shell: lightweight top navigation, one comfortable column below.
-// Auth is not built yet, so the owner shown here is demo data.
-export default function ProductLayout({ children }: { children: React.ReactNode }) {
+// Owner-only: redirects to Log in without a session (server-side, in addition to the
+// proxy) and makes sure the owner's business exists. The profile initial is real.
+export default async function ProductLayout({ children }: { children: React.ReactNode }) {
+  const [user, profile] = await Promise.all([requireUser(), getCurrentProfile(), requireBusiness()]);
+  const initial = (profile?.name || user.email || '?').trim().charAt(0).toUpperCase() || '?';
+
   return (
     <>
-      <ProductHeader ownerInitial={demoOwner.firstName.charAt(0)} />
+      <ProductHeader ownerInitial={initial} />
       <main id="main" tabIndex={-1} className={styles.main}>
         {children}
       </main>

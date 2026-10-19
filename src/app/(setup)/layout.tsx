@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { OnboardingHeader } from '@/components/OnboardingHeader';
+import { requireBusiness } from '@/lib/data/business';
 
 import styles from './layout.module.css';
 
@@ -13,7 +14,11 @@ export const metadata: Metadata = {
 // Onboarding shell: brand and one focused task. Deliberately no product navigation
 // (Home / Assistant / Website / profile) until setup is finished (DESIGN.md section 17).
 // Progress is omitted for now: the docs list nine steps but show a "of 7" indicator.
-export default function SetupLayout({ children }: { children: React.ReactNode }) {
+//
+// Owner-only: redirects to Log in without a session (server-side, in addition to the
+// proxy) and makes sure the owner's business exists before any step renders.
+export default async function SetupLayout({ children }: { children: React.ReactNode }) {
+  await requireBusiness();
   return (
     <>
       <OnboardingHeader />

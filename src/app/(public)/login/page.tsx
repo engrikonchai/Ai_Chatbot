@@ -1,7 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 import { Container } from '@/components/Container';
+import { NOT_CONFIGURED_ERROR } from '@/lib/auth/errors';
+import { getCurrentUser } from '@/lib/auth/session';
+import { destinationFor, getCurrentBusiness } from '@/lib/data/business';
+import { isSupabaseConfigured } from '@/lib/supabase/env';
 
 import styles from '../auth.module.css';
 import { LogInForm } from './LogInForm';
@@ -25,8 +30,16 @@ export default async function LogInPage({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
+  // Already signed in: go where setup stands instead of showing the form.
+  if (await getCurrentUser()) redirect(destinationFor(await getCurrentBusiness()));
+
   const { link } = await searchParams;
-  const initialNote = typeof link === 'string' ? LINK_NOTES[link] : undefined;
+  // Without configuration every owner page redirects here, so say why up front.
+  const initialNote = !isSupabaseConfigured()
+    ? NOT_CONFIGURED_ERROR
+    : typeof link === 'string'
+      ? LINK_NOTES[link]
+      : undefined;
 
   return (
     <Container className={styles.page}>

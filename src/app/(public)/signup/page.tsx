@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 import { Container } from '@/components/Container';
+import { getCurrentUser } from '@/lib/auth/session';
+import { destinationFor, getCurrentBusiness } from '@/lib/data/business';
 
 import styles from '../auth.module.css';
 import { SignUpForm } from './SignUpForm';
@@ -17,7 +20,10 @@ export const metadata: Metadata = {
  *
  * Real sign-up: see SignUpForm and lib/auth/actions.
  */
-export default function SignUpPage() {
+export default async function SignUpPage() {
+  // Already signed in: there is nothing to sign up for.
+  if (await getCurrentUser()) redirect(destinationFor(await getCurrentBusiness()));
+
   return (
     <Container className={styles.page}>
       <div className={styles.intro}>

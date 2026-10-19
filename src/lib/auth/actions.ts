@@ -2,12 +2,12 @@
 
 import { redirect } from 'next/navigation';
 
+import { destinationAfterSignIn } from '@/lib/data/business';
 import { createClient } from '@/lib/supabase/server';
 import { SupabaseConfigError } from '@/lib/supabase/env';
 
 import { authErrorMessage, GENERIC_AUTH_ERROR, NOT_CONFIGURED_ERROR } from './errors';
 import { siteOrigin } from './origin';
-import { destinationFor } from './session';
 import { cleanEmail, cleanName, cleanPassword, isEmail } from './validate';
 
 /*
@@ -78,7 +78,7 @@ export async function logIn(input: { email: unknown; password: unknown }): Promi
     const supabase = await createClient();
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error || !data.user) return { error: authErrorMessage(error) };
-    destination = await destinationFor(data.user.id);
+    destination = await destinationAfterSignIn(supabase, data.user.id);
   } catch (error) {
     return unexpected(error);
   }
@@ -125,7 +125,7 @@ export async function updatePassword(input: { password: unknown }): Promise<Auth
     const supabase = await createClient();
     const { data, error } = await supabase.auth.updateUser({ password });
     if (error || !data.user) return { error: authErrorMessage(error) };
-    destination = await destinationFor(data.user.id);
+    destination = await destinationAfterSignIn(supabase, data.user.id);
   } catch (error) {
     return unexpected(error);
   }
