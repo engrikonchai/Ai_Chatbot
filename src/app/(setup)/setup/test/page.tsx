@@ -16,7 +16,8 @@ export const metadata: Metadata = { title: 'Meet your assistant' };
  * There is no answer engine. Replies come from a fixed local lookup over `demoTest`
  * (see demo-answers), and corrections or teaching only change React state in this tab
  * (see TestConversation). Nothing is generated, saved or sent, and a refresh starts
- * over. No screen links here yet, and "Looks good" does not navigate.
+ * over. No screen links here yet, and "Looks good" does not navigate to Widget Setup
+ * until corrections and taught knowledge can persist.
  */
 export default function TestAssistantPage() {
   return (

@@ -19,7 +19,8 @@ function needsHelpLine(count: number) {
  * DEVELOPMENT / VISUAL VALIDATION STATE ONLY.
  * There is no scanning backend. Everything here comes from `demoAnalysisComplete`, a
  * fixed representative state: it is not the result of any scan, nothing generates it,
- * and no screen links to or from it (neither /setup nor /setup/learning leads here).
+ * and no screen links here (neither /setup nor /setup/learning leads here). Its one
+ * action opens /setup/review, which only navigates and carries nothing across.
  * Do not add timers, requests, or automatic navigation until real analysis exists
  * (DESIGN.md section 26: the UI must not invent backend behaviour). The product copy
  * below is deliberately free of developer notes.

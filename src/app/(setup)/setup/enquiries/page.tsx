@@ -14,8 +14,9 @@ export const metadata: Metadata = { title: 'Where should enquiries go?' };
  *
  * DEVELOPMENT / INTERACTION VALIDATION STATE ONLY.
  * There is no enquiry backend, email delivery or persistence. The form only checks the
- * address in React state (see EnquiryForm). No screen links here yet and Continue does
- * not navigate, because the steps around it are not real. No test email is offered:
+ * address in React state (see EnquiryForm). No screen links here yet, and Continue does
+ * not navigate: Test Assistant exists, but moving on waits until the enquiry address can
+ * actually be saved. No test email is offered:
  * with nothing to send it, the action would be misleading.
  */
 export default function EnquiriesPage() {

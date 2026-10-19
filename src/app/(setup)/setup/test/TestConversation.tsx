@@ -158,9 +158,10 @@ export function TestConversation() {
 
       <div className={styles.finish}>
         {/*
-         * TEMPORARY until Widget Setup exists: "Looks good" only shows a local status.
-         * It does not navigate, save or send anything. Replace with the move to the
-         * next onboarding step.
+         * TEMPORARY: "Looks good" only shows a local status. It does not navigate, save
+         * or send anything. Widget Setup exists, but the move to it is deliberately
+         * deferred until onboarding state and taught knowledge can persist; until then
+         * leaving would silently drop the owner's corrections.
          */}
         <Button onClick={() => setReady(true)}>Looks good</Button>
         <div role="status" className={styles.ready}>

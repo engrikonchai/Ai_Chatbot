@@ -18,7 +18,8 @@ const MESSAGE = {
  * The address lives in React state in this component and nowhere else: no requests,
  * no storage, no cookies. A valid address is not saved and nothing will be emailed to
  * it, so the only feedback is "Looks good." (the address is well formed), never "Saved"
- * or "Connected". Continue does not navigate because the next step is not built yet.
+ * or "Connected". Continue does not navigate: /setup/test exists, but the move is
+ * deliberately deferred until the address can actually be saved.
  * A refresh resets everything. When delivery exists, the success branch of
  * `handleSubmit` becomes a save (with a pending state and a calm failure) followed by
  * moving on to Test Assistant.
