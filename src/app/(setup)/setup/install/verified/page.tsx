@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
-import { AssistantMark } from '@/components/AssistantMark';
 import { Container } from '@/components/Container';
+import { OnboardingIntro } from '@/components/OnboardingIntro';
 import { demoInstall } from '@/lib/demo';
 
 import styles from './verified.module.css';
@@ -22,13 +22,10 @@ const CHECKS = ['Widget detected', 'Assistant ready'] as const;
 export default function InstallVerifiedPage() {
   return (
     <Container>
-      <div className={styles.intro}>
-        <span className={styles.mark}>
-          <AssistantMark size={20} />
-        </span>
-        <h1 className={styles.title}>Your assistant is installed.</h1>
-        <p className={styles.lede}>It’s on {demoInstall.site} and ready for your visitors.</p>
-      </div>
+      <OnboardingIntro
+        title="Your assistant is installed."
+        lede={<>It’s on {demoInstall.site} and ready for your visitors.</>}
+      />
 
       <ul className={styles.checks}>
         {CHECKS.map((label) => (

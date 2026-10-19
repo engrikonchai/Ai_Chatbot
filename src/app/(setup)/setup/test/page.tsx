@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 
-import { AssistantMark } from '@/components/AssistantMark';
 import { Container } from '@/components/Container';
+import { OnboardingIntro } from '@/components/OnboardingIntro';
 
 import { TestConversation } from './TestConversation';
-import styles from './test.module.css';
 
 export const metadata: Metadata = { title: 'Meet your assistant' };
 
@@ -22,13 +21,10 @@ export const metadata: Metadata = { title: 'Meet your assistant' };
 export default function TestAssistantPage() {
   return (
     <Container>
-      <div className={styles.intro}>
-        <span className={styles.mark}>
-          <AssistantMark size={20} />
-        </span>
-        <h1 className={styles.title}>Meet your assistant.</h1>
-        <p className={styles.lede}>Ask it anything a customer might ask.</p>
-      </div>
+      <OnboardingIntro
+        title="Meet your assistant."
+        lede="Ask it anything a customer might ask."
+      />
 
       <TestConversation />
     </Container>

@@ -1,9 +1,18 @@
+import type { Metadata } from 'next';
+
 import { AssistantMark } from '@/components/AssistantMark';
 import { ButtonLink } from '@/components/Button';
 import { Container } from '@/components/Container';
+import { PRODUCT_NAME } from '@/lib/brand';
 import { demoInstall } from '@/lib/demo';
 
 import styles from './landing.module.css';
+
+export const metadata: Metadata = {
+  title: { absolute: `${PRODUCT_NAME}: your website, working for you` },
+  description:
+    'An AI assistant for your website. It learns your business, answers customer questions and emails you the enquiries that matter.',
+};
 
 /**
  * Public landing page (SCREENS.md section 2). One idea, understood in seconds: your

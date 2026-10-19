@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Figtree, Source_Serif_4 } from 'next/font/google';
 
+import { PRODUCT_NAME } from '@/lib/brand';
+
 import '@/styles/tokens.css';
 import './globals.css';
 
@@ -17,8 +19,10 @@ const figtree = Figtree({
   display: 'swap',
 });
 
+// Product name comes from one place (lib/brand) so titles follow it if it changes.
+// The favicon is app/icon.svg and app/favicon.ico, both drawn from the assistant mark.
 export const metadata: Metadata = {
-  title: { default: 'AI Website Assistant', template: '%s · AI Website Assistant' },
+  title: { default: PRODUCT_NAME, template: `%s · ${PRODUCT_NAME}` },
   description: 'An AI assistant for your website that answers customers and captures enquiries.',
 };
 

@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 
-import { AssistantMark } from '@/components/AssistantMark';
 import { Container } from '@/components/Container';
+import { OnboardingIntro } from '@/components/OnboardingIntro';
 
 import { Installation } from './Installation';
-import styles from './install.module.css';
 
 export const metadata: Metadata = { title: 'Add your assistant to your website' };
 
@@ -21,15 +20,10 @@ export const metadata: Metadata = { title: 'Add your assistant to your website' 
 export default function InstallPage() {
   return (
     <Container>
-      <div className={styles.intro}>
-        <span className={styles.mark}>
-          <AssistantMark size={20} />
-        </span>
-        <h1 className={styles.title}>Add your assistant to your website.</h1>
-        <p className={styles.lede}>
-          Paste one small piece of code into your website and your assistant will appear there.
-        </p>
-      </div>
+      <OnboardingIntro
+        title="Add your assistant to your website."
+        lede="Paste one small piece of code into your website and your assistant will appear there."
+      />
 
       <Installation />
     </Container>

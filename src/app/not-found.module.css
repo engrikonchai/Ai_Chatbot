@@ -1,0 +1,30 @@
+.main {
+  padding-block: var(--space-7) var(--space-9);
+}
+
+.main:focus {
+  outline: none;
+}
+
+@media (min-width: 40rem) {
+  .main {
+    padding-block: clamp(var(--space-7), 11vh, 7rem) var(--space-9);
+  }
+}
+
+/* Same serif statement as the onboarding steps. */
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-title);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.lede {
+  max-width: 28rem;
+  margin-block: var(--space-4) var(--space-6);
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}

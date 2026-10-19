@@ -14,7 +14,8 @@
   --color-bg: #f7f5f1; /* DESIGN.md: warm off-white */
   --color-surface: #fcfbf8; /* derived: a touch lighter than bg, for the few contained surfaces */
   --color-border: #e6e2da; /* derived: hairline */
-  --color-border-strong: #cdc7bb; /* derived: inputs, secondary buttons */
+  --color-border-strong: #cdc7bb; /* derived: secondary buttons, option outlines, rules */
+  --color-border-control: #928d84; /* derived: text fields and pickers; about 3:1 on bg (WCAG 1.4.11) */
 
   /* Colour: text */
   --color-text: #23211e; /* DESIGN.md: deep warm charcoal */

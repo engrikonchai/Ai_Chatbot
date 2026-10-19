@@ -6,7 +6,10 @@ import { Container } from '@/components/Container';
 import styles from '../auth.module.css';
 import { SignUpForm } from './SignUpForm';
 
-export const metadata: Metadata = { title: 'Create your account' };
+export const metadata: Metadata = {
+  title: 'Create your account',
+  description: 'Create an account and start building an AI assistant for your website.',
+};
 
 /**
  * Sign up (SCREENS.md section 3): name, email, password, nothing else. Business details

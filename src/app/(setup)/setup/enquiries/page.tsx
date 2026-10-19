@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 
-import { AssistantMark } from '@/components/AssistantMark';
 import { Container } from '@/components/Container';
+import { OnboardingIntro } from '@/components/OnboardingIntro';
 
 import { EnquiryForm } from './EnquiryForm';
-import styles from './enquiries.module.css';
 
 export const metadata: Metadata = { title: 'Where should enquiries go?' };
 
@@ -22,16 +21,10 @@ export const metadata: Metadata = { title: 'Where should enquiries go?' };
 export default function EnquiriesPage() {
   return (
     <Container>
-      <div className={styles.intro}>
-        <span className={styles.mark}>
-          <AssistantMark size={20} />
-        </span>
-        <h1 className={styles.title}>Where should we send customer enquiries?</h1>
-        <p className={styles.lede}>
-          When someone wants to book, request a quote, or needs personal help, your assistant
-          will collect the important details and send them here.
-        </p>
-      </div>
+      <OnboardingIntro
+        title="Where should we send customer enquiries?"
+        lede="When someone wants to book, request a quote, or needs personal help, your assistant will collect the important details and send them here."
+      />
 
       <EnquiryForm />
     </Container>

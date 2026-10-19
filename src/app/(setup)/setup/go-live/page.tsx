@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
-import { AssistantMark } from '@/components/AssistantMark';
 import { ButtonLink } from '@/components/Button';
 import { Container } from '@/components/Container';
+import { OnboardingIntro } from '@/components/OnboardingIntro';
 
 import styles from './go-live.module.css';
 
@@ -25,16 +25,11 @@ export const metadata: Metadata = { title: 'Your assistant is ready' };
 export default function GoLivePage() {
   return (
     <Container>
-      <div className={styles.intro}>
-        <span className={styles.mark}>
-          <AssistantMark size={28} />
-        </span>
-        <h1 className={styles.title}>Your assistant is ready.</h1>
-        <p className={styles.lede}>
-          You’ve finished the setup. Once installation is connected, your assistant will be ready to
-          help visitors and collect enquiries.
-        </p>
-      </div>
+      <OnboardingIntro
+        title="Your assistant is ready."
+        markSize={28}
+        lede="You’ve finished the setup. Once installation is connected, your assistant will be ready to help visitors and collect enquiries."
+      />
 
       <div className={styles.actions}>
         <ButtonLink href="/home">Go to Home</ButtonLink>

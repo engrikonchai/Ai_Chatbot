@@ -1,7 +1,4 @@
-/*
- * Same intro as the other onboarding steps, copied on purpose (this milestone is not a
- * refactor). Five copies now exist: extract a shared step-intro component next.
- */
+/* Extracted unchanged from the ten onboarding steps that each carried a copy. */
 .intro {
   display: flex;
   flex-direction: column;
@@ -10,12 +7,13 @@
   padding-block-end: var(--space-6);
 }
 
+/* The assistant, present but quiet. */
 .mark {
   color: var(--color-moss);
   margin-block-end: var(--space-2);
 }
 
-/* The assistant speaking: serif. */
+/* The assistant speaking: serif. Important, but this is product onboarding, not a hero. */
 .title {
   font-family: var(--font-serif);
   font-size: var(--text-title);

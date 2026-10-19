@@ -175,7 +175,7 @@
   min-width: 0;
   min-height: var(--touch-target);
   padding: var(--space-3);
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid var(--color-border-control);
   border-radius: var(--radius-input);
   background: var(--color-surface);
   font-size: var(--text-md);

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
-import { AssistantMark } from '@/components/AssistantMark';
 import { Container } from '@/components/Container';
+import { OnboardingIntro } from '@/components/OnboardingIntro';
 import { demoAnalysisComplete } from '@/lib/demo';
 
 import { ReviewAction } from './ReviewAction';
@@ -30,16 +30,10 @@ export default function AnalysisCompletePage() {
   return (
     <Container>
       <div className={styles.content}>
-        <div className={styles.intro}>
-          <span className={styles.mark}>
-            <AssistantMark size={20} />
-          </span>
-          <h1 className={styles.title}>I learned the basics.</h1>
-          <p className={styles.lede}>
-            I found the important information about your business. There are just a few things I’d
-            like you to check.
-          </p>
-        </div>
+        <OnboardingIntro
+          title="I learned the basics."
+          lede="I found the important information about your business. There are just a few things I’d like you to check."
+        />
 
         <section aria-labelledby="learned-heading">
           <h2 id="learned-heading" className="visually-hidden">

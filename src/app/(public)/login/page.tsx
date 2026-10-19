@@ -6,7 +6,10 @@ import { Container } from '@/components/Container';
 import styles from '../auth.module.css';
 import { LogInForm } from './LogInForm';
 
-export const metadata: Metadata = { title: 'Log in' };
+export const metadata: Metadata = {
+  title: 'Log in',
+  description: 'Log in to check on your website assistant.',
+};
 
 /**
  * Log in (SCREENS.md section 4): email and password, a way to recover, a way to sign up.

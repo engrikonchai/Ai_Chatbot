@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
-import { AssistantMark } from '@/components/AssistantMark';
 import { Container } from '@/components/Container';
+import { OnboardingIntro } from '@/components/OnboardingIntro';
 import { demoLearning } from '@/lib/demo';
 
 import { LearningSteps } from './LearningSteps';
@@ -22,16 +22,12 @@ export const metadata: Metadata = { title: 'Learning about your business' };
 export default function LearningPage() {
   return (
     <Container>
-      <div className={styles.intro}>
-        <span className={styles.mark}>
-          <AssistantMark size={20} />
-        </span>
-        <h1 className={styles.title}>Learning about your business...</h1>
-        <p className={styles.lede}>
-          We’re learning the basics from your website — your services, prices and policies.
-        </p>
+      <OnboardingIntro
+        title="Learning about your business..."
+        lede="We’re learning the basics from your website — your services, prices and policies."
+      >
         <p className={styles.site}>{demoLearning.site}</p>
-      </div>
+      </OnboardingIntro>
 
       <LearningSteps steps={demoLearning.steps} />
     </Container>

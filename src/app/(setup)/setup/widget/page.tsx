@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 
-import { AssistantMark } from '@/components/AssistantMark';
 import { Container } from '@/components/Container';
+import { OnboardingIntro } from '@/components/OnboardingIntro';
 
 import { WidgetSetup } from './WidgetSetup';
-import styles from './widget.module.css';
 
 export const metadata: Metadata = { title: 'Make it yours' };
 
@@ -21,16 +20,10 @@ export const metadata: Metadata = { title: 'Make it yours' };
 export default function WidgetSetupPage() {
   return (
     <Container size="split">
-      <div className={styles.intro}>
-        <span className={styles.mark}>
-          <AssistantMark size={20} />
-        </span>
-        <h1 className={styles.title}>Make it yours.</h1>
-        <p className={styles.lede}>
-          This is what visitors will see on your website. Adjust a few basics before you install
-          it.
-        </p>
-      </div>
+      <OnboardingIntro
+        title="Make it yours."
+        lede="This is what visitors will see on your website. Adjust a few basics before you install it."
+      />
 
       <WidgetSetup />
     </Container>

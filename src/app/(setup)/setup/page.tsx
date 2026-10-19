@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 
-import { AssistantMark } from '@/components/AssistantMark';
 import { Container } from '@/components/Container';
+import { OnboardingIntro } from '@/components/OnboardingIntro';
 
 import { AddWebsiteForm } from './AddWebsiteForm';
-import styles from './setup.module.css';
 
 export const metadata: Metadata = { title: 'Add your website' };
 
@@ -15,15 +14,10 @@ export const metadata: Metadata = { title: 'Add your website' };
 export default function AddWebsitePage() {
   return (
     <Container>
-      <div className={styles.intro}>
-        <span className={styles.mark}>
-          <AssistantMark size={20} />
-        </span>
-        <h1 className={styles.title}>Let’s build your assistant.</h1>
-        <p className={styles.lede}>
-          Start with your website. We’ll learn the basics about your business automatically.
-        </p>
-      </div>
+      <OnboardingIntro
+        title="Let’s build your assistant."
+        lede="Start with your website. We’ll learn the basics about your business automatically."
+      />
 
       <AddWebsiteForm />
     </Container>

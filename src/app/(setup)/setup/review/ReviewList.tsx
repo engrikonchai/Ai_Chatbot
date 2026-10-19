@@ -2,12 +2,11 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 
-import { AssistantMark } from '@/components/AssistantMark';
 import { Button } from '@/components/Button';
+import { OnboardingIntro } from '@/components/OnboardingIntro';
 import { Input, Textarea } from '@/components/Field';
 
 import styles from './ReviewList.module.css';
-import introStyles from './review.module.css';
 
 /*
  * UX VALIDATION ONLY, until the real knowledge system exists.
@@ -74,17 +73,14 @@ export function ReviewList({ items }: { items: readonly ReviewItem[] }) {
 
   return (
     <>
-      <div className={introStyles.intro}>
-        <span className={introStyles.mark}>
-          <AssistantMark size={20} />
-        </span>
-        <h1 className={introStyles.title}>Just a few things to check.</h1>
-        <p className={introStyles.lede}>
-          {remaining === 0
+      <OnboardingIntro
+        title="Just a few things to check."
+        lede={
+          remaining === 0
             ? 'Thanks — I have what I need.'
-            : 'I understood most of your business. I just need your help with a few details.'}
-        </p>
-      </div>
+            : 'I understood most of your business. I just need your help with a few details.'
+        }
+      />
 
       <section aria-labelledby={headingId}>
         <h2 id={headingId} className={styles.summary}>
