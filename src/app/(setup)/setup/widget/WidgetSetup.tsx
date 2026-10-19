@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useId, useRef, useState } from 'react';
 
 import { AssistantMark } from '@/components/AssistantMark';
@@ -15,7 +16,7 @@ import styles from './WidgetSetup.module.css';
  * Appearance lives in React state in this component and nowhere else: no requests, no
  * storage, no cookies. The preview is drawn here from that state and updates as the
  * owner types; it is a picture of the widget, not the widget. A refresh restores the
- * defaults. The four controls are the whole approved set (SCREENS.md section 10):
+ * defaults, and Continue moves on to Installation without saving anything. The four controls are the whole approved set (SCREENS.md section 10):
  * do not add fonts, radii, sizes, shadows, themes or custom CSS here.
  */
 
@@ -38,7 +39,7 @@ export function WidgetSetup() {
   const [position, setPosition] = useState<Position>(demoWidget.position);
   const [open, setOpen] = useState(true);
   const [errors, setErrors] = useState<{ name?: string; greeting?: string }>({});
-  const [note, setNote] = useState<string>();
+  const router = useRouter();
   const nameRef = useRef<HTMLInputElement>(null);
   const greetingRef = useRef<HTMLTextAreaElement>(null);
   const colourId = useId();
@@ -52,8 +53,8 @@ export function WidgetSetup() {
     setErrors(next);
     if (next.name) nameRef.current?.focus();
     else if (next.greeting) greetingRef.current?.focus();
-    // TEMPORARY until Installation exists: say plainly that nothing happened.
-    else setNote('The installation step isn’t available yet, so nothing was saved.');
+    // Nothing to save yet: appearance is not persisted, so this is only the next step.
+    else router.push('/setup/install');
   }
 
   return (
@@ -79,7 +80,6 @@ export function WidgetSetup() {
           onChange={(event) => {
             setName(event.target.value);
             if (errors.name) setErrors((current) => ({ ...current, name: undefined }));
-            setNote(undefined);
           }}
         />
 
@@ -94,7 +94,6 @@ export function WidgetSetup() {
           onChange={(event) => {
             setGreeting(event.target.value);
             if (errors.greeting) setErrors((current) => ({ ...current, greeting: undefined }));
-            setNote(undefined);
           }}
         />
 
@@ -110,10 +109,7 @@ export function WidgetSetup() {
               name="primary-colour"
               value={colour}
               aria-describedby={`${colourId}-value`}
-              onChange={(event) => {
-                setColour(event.target.value);
-                setNote(undefined);
-              }}
+              onChange={(event) => setColour(event.target.value)}
             />
             {/* The value in words too, so the choice never depends on seeing colour. */}
             <span id={`${colourId}-value`} className={styles.colourValue}>
@@ -133,10 +129,7 @@ export function WidgetSetup() {
                   name="position"
                   value={option.value}
                   checked={position === option.value}
-                  onChange={() => {
-                    setPosition(option.value);
-                    setNote(undefined);
-                  }}
+                  onChange={() => setPosition(option.value)}
                 />
                 <span>{option.label}</span>
               </label>
@@ -146,9 +139,6 @@ export function WidgetSetup() {
 
         <div className={styles.finish}>
           <Button type="submit">Continue to installation</Button>
-          <div role="status" className={styles.status}>
-            {note ? <p>{note}</p> : null}
-          </div>
         </div>
       </form>
     </div>
