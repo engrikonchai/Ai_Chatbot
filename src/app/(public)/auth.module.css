@@ -1,0 +1,91 @@
+/*
+ * Shared by Sign Up and Log In. A narrow, unboxed form on the page itself: no card,
+ * no shadow. Same column and intro rhythm as the onboarding steps it leads into.
+ */
+
+.page {
+  padding-block: var(--space-7) var(--space-9);
+}
+
+@media (min-width: 40rem) {
+  .page {
+    padding-block: clamp(var(--space-7), 11vh, 7rem) var(--space-9);
+  }
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding-block-end: var(--space-6);
+}
+
+/* The product speaking: serif, at the onboarding title size. */
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--text-title);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.lede {
+  max-width: 28rem;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 28rem;
+}
+
+/* Phones: the primary action spans the width. */
+.submit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-block-start: var(--space-2);
+}
+
+@media (min-width: 40rem) {
+  .submit {
+    align-items: flex-start;
+  }
+}
+
+.status:empty {
+  display: none;
+}
+
+.status {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  text-wrap: pretty;
+}
+
+/* "Forgot password?": quiet, attached to the field above it. Scoped to win over the
+   shared quiet-button padding. */
+.form .forgot {
+  align-self: flex-start;
+  margin-block-start: calc(var(--space-3) * -1);
+  padding-inline: 0;
+}
+
+.switch {
+  margin-block-start: var(--space-6);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.switch a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target);
+  color: var(--color-text);
+  font-weight: 600;
+}

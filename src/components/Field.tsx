@@ -15,7 +15,7 @@ type FieldProps = {
   action?: React.ReactNode;
 };
 
-function useFieldIds(id: string | undefined, hint?: string, error?: string) {
+export function useFieldIds(id: string | undefined, hint?: string, error?: string) {
   const generated = useId();
   const fieldId = id ?? generated;
   const hintId = hint ? `${fieldId}-hint` : undefined;
@@ -24,7 +24,8 @@ function useFieldIds(id: string | undefined, hint?: string, error?: string) {
   return { fieldId, hintId, errorId, describedBy };
 }
 
-function Shell({
+/** Label, hint, control and error in the shared order. Exported for PasswordInput. */
+export function Shell({
   fieldId,
   hintId,
   errorId,
