@@ -1,0 +1,403 @@
+/*
+ * Landing page. Same language as the product (warm paper, charcoal, moss, serif for
+ * the assistant's voice, Figtree for everything else) with a little more scale and
+ * rhythm than product screens. Structure comes from whitespace and hairlines; the
+ * only contained surfaces are the illustrative examples.
+ */
+
+/* ----- Hero ----- */
+
+.hero {
+  display: grid;
+  gap: var(--space-7);
+  padding-block: var(--space-6) var(--space-8);
+}
+
+@media (min-width: 64rem) {
+  .hero {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-8);
+    padding-block: clamp(var(--space-8), 12vh, 8rem) var(--space-9);
+  }
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+/* The one large statement on the page. */
+.heroTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(2.125rem, 1.5rem + 3.4vw, 4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+/* Two deliberate lines; the smallest phones may wrap the second. */
+.line {
+  display: block;
+}
+
+.heroLede {
+  max-width: 32rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  line-height: var(--leading-body);
+  text-wrap: pretty;
+}
+
+/* Phones: both actions full width, primary first. */
+.ctas {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  gap: var(--space-3);
+  margin-block-start: var(--space-2);
+}
+
+@media (min-width: 40rem) {
+  .ctas {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-self: flex-start;
+  }
+}
+
+/* The example conversation: a calm sheet of paper, with the result slipped beneath it. */
+.demo {
+  margin: 0;
+  width: 100%;
+  max-width: 30rem;
+}
+
+@media (min-width: 64rem) {
+  .demo {
+    justify-self: end;
+  }
+}
+
+.chat {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-surface);
+  background: var(--color-surface);
+}
+
+.chatHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-block-end: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.chatMark {
+  color: var(--color-moss);
+}
+
+.chatBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+}
+
+.visitor,
+.reply {
+  max-width: 85%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-surface);
+  line-height: var(--leading-snug);
+  text-wrap: pretty;
+}
+
+.visitor {
+  align-self: flex-end;
+  background: var(--color-moss-tint);
+  font-size: var(--text-sm);
+}
+
+/* The assistant speaking: serif, as everywhere in the product. */
+.reply {
+  align-self: flex-start;
+  background: var(--color-bg);
+  font-family: var(--font-serif);
+  font-size: var(--text-md);
+}
+
+/* The enquiry that results: a small slip tucked under the conversation. */
+.sent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: fit-content;
+  max-width: calc(100% - var(--space-5));
+  margin: calc(var(--space-3) * -1) 0 0 var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-surface);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.sent svg {
+  flex: none;
+  stroke: var(--color-moss);
+}
+
+@media (min-width: 40rem) {
+  .chatBody {
+    padding: var(--space-5);
+  }
+}
+
+/* ----- Sections ----- */
+
+/* A lighter sheet behind "How it works" and the closing call to action. */
+.band {
+  border-block: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.section {
+  padding-block: var(--space-8);
+  scroll-margin-block-start: var(--space-4);
+}
+
+.split {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 64rem) {
+  .section {
+    padding-block: var(--space-9);
+  }
+
+  /* Statement on the left, detail on the right. */
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-8);
+  }
+}
+
+.eyebrow {
+  margin-block-end: var(--space-3);
+  color: var(--color-moss);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.sectionTitle {
+  max-width: 20ch;
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 1.25rem + 1.9vw, 2.625rem);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 30rem;
+  margin-block-start: var(--space-5);
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+.itemTitle {
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+.itemText {
+  margin-block-start: var(--space-2);
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
+.rule {
+  margin: 0;
+  border: 0;
+  border-block-start: 1px solid var(--color-border);
+}
+
+/* How it works: four short steps, hairline above each, no boxes. */
+.steps {
+  display: grid;
+  gap: var(--space-6);
+  margin: var(--space-7) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-6);
+  }
+}
+
+@media (min-width: 64rem) {
+  .steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.step {
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--color-border-strong);
+}
+
+.stepNumber {
+  display: block;
+  margin-block-end: var(--space-3);
+  color: var(--color-moss);
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  line-height: 1;
+}
+
+/* Outcomes: a short list divided by hairlines. */
+.outcomes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.outcome {
+  padding-block: var(--space-5);
+  border-block-start: 1px solid var(--color-border);
+}
+
+.outcome:first-child {
+  padding-block-start: 0;
+  border-block-start: 0;
+}
+
+@media (min-width: 64rem) {
+  .outcome:first-child {
+    padding-block-start: var(--space-2);
+  }
+}
+
+/* Example enquiry email: paper, quiet labels, nothing that looks like a dashboard. */
+.email {
+  margin: 0;
+  max-width: 28rem;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-surface);
+  background: var(--color-surface);
+  overflow-wrap: anywhere;
+}
+
+.emailSubject {
+  padding-block-end: var(--space-4);
+  border-block-end: 1px solid var(--color-border);
+  font-weight: 600;
+}
+
+.emailFields {
+  display: grid;
+  gap: var(--space-2);
+  padding-block: var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.emailFields > div {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: var(--space-3);
+}
+
+.emailFields dt {
+  color: var(--color-text-muted);
+}
+
+.emailRequest {
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--color-border);
+  font-family: var(--font-serif);
+  line-height: var(--leading-snug);
+}
+
+/* Example snippet: wraps rather than scrolls, so it never widens a phone screen. */
+.code {
+  margin: 0;
+  max-width: 30rem;
+}
+
+.snippet {
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-surface);
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-body);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 64rem) {
+  .email,
+  .code {
+    justify-self: end;
+    width: 100%;
+  }
+}
+
+/* ----- Closing ----- */
+
+.closing {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-5);
+  padding-block: var(--space-8);
+}
+
+@media (min-width: 40rem) {
+  .closing {
+    align-items: flex-start;
+  }
+}
+
+@media (min-width: 64rem) {
+  .closing {
+    padding-block: var(--space-9);
+  }
+}
+
+.closingTitle {
+  max-width: 16ch;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 1.35rem + 2.6vw, 3.25rem);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.closingLede {
+  max-width: 30rem;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}

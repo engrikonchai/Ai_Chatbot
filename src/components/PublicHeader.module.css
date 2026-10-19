@@ -1,0 +1,79 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  height: 3.5rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target);
+  color: var(--color-moss);
+  text-decoration: none;
+}
+
+.brand:focus-visible {
+  border-radius: var(--radius-button);
+}
+
+.wordmark {
+  color: var(--color-text);
+  font-size: var(--text-md);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target);
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-button);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.link[aria-current='page'] {
+  color: var(--color-text);
+}
+
+@media (hover: hover) {
+  .link:hover {
+    color: var(--color-text);
+  }
+}
+
+/* A smaller button than in page content: it sits in a quiet header. Scoped to .nav so it
+   wins over the shared button styles regardless of stylesheet order. */
+.nav .cta {
+  min-height: 2.5rem;
+  margin-inline-start: var(--space-2);
+  padding-inline: var(--space-4);
+}
+
+/* Phones: brand and "Log in" only. */
+.nav .roomy {
+  display: none;
+}
+
+@media (min-width: 40rem) {
+  .bar {
+    height: 4rem;
+  }
+
+  .nav .roomy {
+    display: inline-flex;
+  }
+}
