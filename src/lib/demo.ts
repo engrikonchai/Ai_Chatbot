@@ -1,5 +1,6 @@
 /**
- * DEMO DATA for the validation screens (Home, Learning, Analysis complete, Review, Test).
+ * DEMO DATA for the validation screens (Home, Learning, Analysis complete, Review, Test,
+ * Widget).
  * No backend exists yet. Values come from the wireframes. Replace with real data when the
  * data layer exists; nothing else should import this.
  */
@@ -74,6 +75,18 @@ export const demoReview = {
       example: 'Yes, pets are welcome for an additional €10 per night.',
     },
   ],
+} as const;
+
+/**
+ * Starting appearance for /setup/widget. These are product defaults, not values read
+ * from any website, and nothing saves changes to them: a refresh restores these.
+ * The greeting matches the test conversation so the assistant feels like the same one.
+ */
+export const demoWidget = {
+  name: 'Assistant',
+  greeting: 'Hi! How can I help?',
+  colour: '#57644a',
+  position: 'right',
 } as const;
 
 /**

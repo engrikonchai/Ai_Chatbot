@@ -69,6 +69,7 @@
   --gutter: var(--space-4);
   --width-wide: 70rem; /* header and page frame */
   --width-reading: 40rem; /* core product content */
+  --width-split: 56rem; /* preview beside controls (Widget Setup); same left edge as reading */
   --touch-target: 2.75rem; /* 44px */
 
   /* Elevation: very little (DESIGN.md section 11). Reserved for layered UI. */

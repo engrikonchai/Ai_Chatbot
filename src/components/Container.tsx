@@ -4,8 +4,10 @@ type ContainerProps = {
   /**
    * `wide`: the page frame (header). `reading`: core product content, a narrow
    * column that sits slightly left of centre on large screens (DESIGN.md section 7).
+   * `split`: starts where `reading` starts but is wide enough for a preview beside its
+   * controls (Widget Setup). Use only when two columns genuinely help the task.
    */
-  size?: 'wide' | 'reading';
+  size?: 'wide' | 'reading' | 'split';
   className?: string;
   children: React.ReactNode;
 };
