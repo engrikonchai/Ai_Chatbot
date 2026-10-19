@@ -1,23 +1,24 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useId, useRef, useState } from 'react';
+import { useId, useRef, useState, useTransition } from 'react';
 
 import { AssistantMark } from '@/components/AssistantMark';
 import { Button } from '@/components/Button';
 import { Input, Textarea } from '@/components/Field';
-import { demoWidget } from '@/lib/demo';
 
+import { saveWidgetSettings } from '../actions';
 import styles from './WidgetSetup.module.css';
 
 /*
- * UX VALIDATION ONLY, until the embeddable widget and saving exist.
+ * The owner's real widget appearance (widget_settings, see ../actions).
  *
- * Appearance lives in React state in this component and nowhere else: no requests, no
- * storage, no cookies. The preview is drawn here from that state and updates as the
- * owner types; it is a picture of the widget, not the widget. A refresh restores the
- * defaults, and Continue moves on to Installation without saving anything. The four controls are the whole approved set (SCREENS.md section 10):
- * do not add fonts, radii, sizes, shadows, themes or custom CSS here.
+ * Starts from the saved values (or the approved defaults the database creates with
+ * every business). Changes update the preview immediately in React state and are
+ * saved only on Continue, which then moves on to Installation; a failed save keeps the
+ * owner here with a calm message. The preview is a picture of the widget drawn by this
+ * page; the embeddable widget that will use these settings does not exist yet. The
+ * four controls are the whole approved set (SCREENS.md section 10): do not add fonts,
+ * radii, sizes, shadows, themes or custom CSS here.
  */
 
 type Position = 'left' | 'right';
@@ -32,14 +33,17 @@ const POSITIONS: readonly { value: Position; label: string }[] = [
   { value: 'right', label: 'Right' },
 ];
 
-export function WidgetSetup() {
-  const [name, setName] = useState<string>(demoWidget.name);
-  const [greeting, setGreeting] = useState<string>(demoWidget.greeting);
-  const [colour, setColour] = useState<string>(demoWidget.colour);
-  const [position, setPosition] = useState<Position>(demoWidget.position);
+export type WidgetValues = { name: string; greeting: string; colour: string; position: Position };
+
+export function WidgetSetup({ initial }: { initial: WidgetValues }) {
+  const [name, setName] = useState(initial.name);
+  const [greeting, setGreeting] = useState(initial.greeting);
+  const [colour, setColour] = useState(initial.colour);
+  const [position, setPosition] = useState<Position>(initial.position);
   const [open, setOpen] = useState(true);
   const [errors, setErrors] = useState<{ name?: string; greeting?: string }>({});
-  const router = useRouter();
+  const [note, setNote] = useState<string>();
+  const [pending, startTransition] = useTransition();
   const nameRef = useRef<HTMLInputElement>(null);
   const greetingRef = useRef<HTMLTextAreaElement>(null);
   const colourId = useId();
@@ -51,10 +55,16 @@ export function WidgetSetup() {
       greeting: greeting.trim() ? undefined : MESSAGE.greeting,
     };
     setErrors(next);
+    setNote(undefined);
     if (next.name) nameRef.current?.focus();
     else if (next.greeting) greetingRef.current?.focus();
-    // Nothing to save yet: appearance is not persisted, so this is only the next step.
-    else router.push('/setup/install');
+    else if (!pending) {
+      startTransition(async () => {
+        // On success the action redirects to /setup/install and nothing below runs.
+        const result = await saveWidgetSettings({ name, greeting, colour, position });
+        if (result.error) setNote(result.error);
+      });
+    }
   }
 
   return (
@@ -138,7 +148,12 @@ export function WidgetSetup() {
         </fieldset>
 
         <div className={styles.finish}>
-          <Button type="submit">Continue to installation</Button>
+          <Button type="submit" disabled={pending}>
+            {pending ? 'Saving…' : 'Continue to installation'}
+          </Button>
+          <div role="status" className={styles.status}>
+            {note ? <p>{note}</p> : null}
+          </div>
         </div>
       </form>
     </div>

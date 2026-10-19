@@ -352,6 +352,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  gap: var(--space-4);
   margin-block-start: var(--space-2);
 }
 
@@ -359,4 +360,15 @@
   .finish {
     align-items: flex-start;
   }
+}
+
+/* A save problem, shown only when there is one. */
+.status:empty {
+  display: none;
+}
+
+.status {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-wrap: pretty;
 }

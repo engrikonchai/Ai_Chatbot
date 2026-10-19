@@ -1,11 +1,12 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useTransition } from 'react';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Field';
 import { normalizeWebsite } from '@/lib/website-url';
 
+import { saveWebsite } from './actions';
 import styles from './AddWebsiteForm.module.css';
 
 const MESSAGE = {
@@ -14,15 +15,16 @@ const MESSAGE = {
 } as const;
 
 /**
- * Milestone 2: the form checks the address and stops there.
+ * Saves the owner's website address to their business (see ./actions).
  *
- * TEMPORARY: there is no website scanner yet, so a valid address does NOT start
- * analysis, navigate, or show results. It only tells the owner, plainly, that
- * scanning is not connected. Replace `handleSubmit`'s success branch when the
- * real analysis flow exists. Likewise "Set up manually" is a placeholder.
+ * TEMPORARY until website analysis exists (Phase 2 Part 2): a valid address is saved
+ * for real, and the form says exactly that. It does NOT start analysis, navigate to
+ * Learning or show results, because nothing reads the site yet. When analysis exists,
+ * the success branch starts it and moves on. "Set up manually" is still a placeholder.
  */
-export function AddWebsiteForm() {
-  const [value, setValue] = useState('');
+export function AddWebsiteForm({ initialWebsite }: { initialWebsite: string | null }) {
+  const [value, setValue] = useState(initialWebsite ?? '');
+  const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string>();
   const [note, setNote] = useState<string>();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -39,8 +41,19 @@ export function AddWebsiteForm() {
     }
 
     setError(undefined);
-    // TEMPORARY (see above): honest placeholder, no fake analysis.
-    setNote(`Website analysis isn’t connected yet, so nothing was scanned. We would start with ${result.url}.`);
+    if (pending) return;
+    startTransition(async () => {
+      const saved = await saveWebsite({ website: value });
+      if (saved.error) {
+        setNote(saved.error);
+        return;
+      }
+      // TEMPORARY (see above): saved for real, but nothing was scanned.
+      setValue(saved.saved ?? result.url);
+      setNote(
+        `Saved ${saved.saved ?? result.url}. Website analysis isn’t available yet, so nothing has been scanned.`,
+      );
+    });
   }
 
   function handleManual() {
@@ -69,7 +82,11 @@ export function AddWebsiteForm() {
           setValue(event.target.value);
           if (error) setError(undefined);
         }}
-        action={<Button type="submit">Analyze website</Button>}
+        action={
+          <Button type="submit" disabled={pending}>
+            {pending ? 'Saving…' : 'Analyze website'}
+          </Button>
+        }
       />
 
       <div className={styles.manual}>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import { Container } from '@/components/Container';
 import { OnboardingIntro } from '@/components/OnboardingIntro';
+import { requireBusiness } from '@/lib/data/business';
 
 import { AddWebsiteForm } from './AddWebsiteForm';
 
@@ -11,7 +12,9 @@ export const metadata: Metadata = { title: 'Add your website' };
  * Onboarding step 1: Add website (WIREFRAMES.md, "Step 1 - Add Website").
  * The smallest possible first action: one field, one primary action.
  */
-export default function AddWebsitePage() {
+export default async function AddWebsitePage() {
+  const business = await requireBusiness();
+
   return (
     <Container>
       <OnboardingIntro
@@ -19,7 +22,7 @@ export default function AddWebsitePage() {
         lede="Start with your website. We’ll learn the basics about your business automatically."
       />
 
-      <AddWebsiteForm />
+      <AddWebsiteForm initialWebsite={business.website_url} />
     </Container>
   );
 }

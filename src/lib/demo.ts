@@ -78,9 +78,10 @@ export const demoReview = {
 } as const;
 
 /**
- * Starting appearance for /setup/widget. These are product defaults, not values read
- * from any website, and nothing saves changes to them: a refresh restores these.
- * The greeting matches the test conversation so the assistant feels like the same one.
+ * The approved widget defaults. The database uses the same values for every new
+ * business (widget_settings column defaults); /setup/widget only falls back to these
+ * if a saved row is missing. The greeting matches the test conversation so the
+ * assistant feels like the same one.
  */
 export const demoWidget = {
   name: 'Assistant',
