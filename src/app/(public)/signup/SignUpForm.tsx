@@ -1,21 +1,23 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState, useTransition } from 'react';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Field';
 import { PasswordInput } from '@/components/PasswordInput';
+import { signUp } from '@/lib/auth/actions';
 
 import styles from '../auth.module.css';
 
 /*
- * FRONTEND VALIDATION ONLY, until authentication exists.
+ * Creates a real account with Supabase Auth (see lib/auth/actions).
  *
- * The form checks its fields in React state and stops there: no request, no account,
- * no storage, no cookies, no navigation. A valid submission only says plainly that
- * account setup isn't connected. It must not move on to /setup or show any signed-in
- * state until real sign-up exists. No password rules are enforced beyond "not empty"
- * because the policy has not been decided.
+ * Fields are checked here first for quick feedback, then again on the server. On
+ * success the owner goes straight to /setup. If the project requires email
+ * confirmation, no session exists yet, so the form says "Check your email" and does
+ * not pretend the owner is signed in. Problems arrive as calm messages, never raw
+ * provider errors. No password rules beyond "not empty" are enforced here; the
+ * project's own policy reports back if a password is too weak.
  */
 
 type Errors = { name?: string; email?: string; password?: string };
@@ -26,12 +28,20 @@ export function SignUpForm() {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<Errors>({});
   const [note, setNote] = useState<string>();
+  const [checkEmail, setCheckEmail] = useState(false);
+  const [pending, startTransition] = useTransition();
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const doneRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (checkEmail) doneRef.current?.focus();
+  }, [checkEmail]);
 
   function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (pending) return;
     const emailInput = emailRef.current;
     const next: Errors = {
       name: name.trim() ? undefined : 'Enter your name.',
@@ -43,17 +53,36 @@ export function SignUpForm() {
       password: password ? undefined : 'Enter a password.',
     };
     setErrors(next);
+    setNote(undefined);
 
     if (next.name) nameRef.current?.focus();
     else if (next.email) emailInput?.focus();
     else if (next.password) passwordRef.current?.focus();
-    // TEMPORARY (see above): honest placeholder, no account is created.
-    else setNote('Account setup isn’t connected yet.');
+    else {
+      startTransition(async () => {
+        // On success the action redirects to /setup and nothing below runs.
+        const result = await signUp({ name, email, password });
+        if (result.checkEmail) setCheckEmail(true);
+        else if (result.error) setNote(result.error);
+      });
+    }
   }
 
   function clear(field: keyof Errors) {
     if (errors[field]) setErrors((current) => ({ ...current, [field]: undefined }));
     setNote(undefined);
+  }
+
+  if (checkEmail) {
+    return (
+      <div ref={doneRef} tabIndex={-1} className={styles.done}>
+        <p className={styles.doneTitle}>Check your email to continue.</p>
+        <p className={styles.doneText}>
+          We sent a link to {email.trim()}. Open it in this browser to finish creating your
+          account.
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -103,7 +132,9 @@ export function SignUpForm() {
       />
 
       <div className={styles.submit}>
-        <Button type="submit">Create account</Button>
+        <Button type="submit" disabled={pending}>
+          {pending ? 'Creating account…' : 'Create account'}
+        </Button>
         <div role="status" className={styles.status}>
           {note ? <p>{note}</p> : null}
         </div>

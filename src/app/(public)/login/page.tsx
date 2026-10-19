@@ -11,12 +11,23 @@ export const metadata: Metadata = {
   description: 'Log in to check on your website assistant.',
 };
 
+/** Calm explanations for the reasons the auth callback can send someone here. */
+const LINK_NOTES: Record<string, string> = {
+  expired: 'That link has expired or was already used. Log in, or request a new link.',
+};
+
 /**
  * Log in (SCREENS.md section 4): email and password, a way to recover, a way to sign up.
- *
- * FRONTEND ONLY: see LogInForm. Nobody is logged in and nothing navigates onward.
+ * Real authentication: see LogInForm and lib/auth/actions.
  */
-export default function LogInPage() {
+export default async function LogInPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const { link } = await searchParams;
+  const initialNote = typeof link === 'string' ? LINK_NOTES[link] : undefined;
+
   return (
     <Container className={styles.page}>
       <div className={styles.intro}>
@@ -24,7 +35,7 @@ export default function LogInPage() {
         <p className={styles.lede}>Log in to check on your assistant.</p>
       </div>
 
-      <LogInForm />
+      <LogInForm initialNote={initialNote} />
 
       <p className={styles.switch}>
         New here? <Link href="/signup">Create account</Link>

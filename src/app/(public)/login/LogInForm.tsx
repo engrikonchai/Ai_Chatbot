@@ -1,35 +1,38 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import Link from 'next/link';
+import { useRef, useState, useTransition } from 'react';
 
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Field';
 import { PasswordInput } from '@/components/PasswordInput';
+import { logIn } from '@/lib/auth/actions';
 
 import styles from '../auth.module.css';
 
 /*
- * FRONTEND VALIDATION ONLY, until authentication exists.
+ * Real email and password login with Supabase Auth (see lib/auth/actions).
  *
- * The form checks its fields in React state and stops there: no request, no session,
- * no storage, no cookies, no navigation. A valid submission only says plainly that
- * login isn't connected, and "Forgot password?" says reset isn't connected rather than
- * pretending an email was sent. Neither may show a signed-in state or move to /home
- * or /setup until real authentication exists.
+ * Fields are checked here first, then on the server. On success the action sends the
+ * owner to Home if setup is genuinely complete, otherwise to setup; completion comes
+ * from the database, never from this form. Wrong credentials get one calm line that
+ * does not say which field was wrong.
  */
 
 type Errors = { email?: string; password?: string };
 
-export function LogInForm() {
+export function LogInForm({ initialNote }: { initialNote?: string }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<Errors>({});
-  const [note, setNote] = useState<string>();
+  const [note, setNote] = useState<string | undefined>(initialNote);
+  const [pending, startTransition] = useTransition();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (pending) return;
     const emailInput = emailRef.current;
     const next: Errors = {
       email: emailInput?.validity.valueMissing
@@ -40,11 +43,17 @@ export function LogInForm() {
       password: password ? undefined : 'Enter your password.',
     };
     setErrors(next);
+    setNote(undefined);
 
     if (next.email) emailInput?.focus();
     else if (next.password) passwordRef.current?.focus();
-    // TEMPORARY (see above): honest placeholder, nobody is logged in.
-    else setNote('Login isn’t connected yet.');
+    else {
+      startTransition(async () => {
+        // On success the action redirects and nothing below runs.
+        const result = await logIn({ email, password });
+        if (result.error) setNote(result.error);
+      });
+    }
   }
 
   function clear(field: keyof Errors) {
@@ -84,17 +93,14 @@ export function LogInForm() {
           clear('password');
         }}
       />
-      {/* TEMPORARY: no reset email exists, so this only says so. */}
-      <Button
-        variant="quiet"
-        className={styles.forgot}
-        onClick={() => setNote('Password reset isn’t connected yet.')}
-      >
+      <Link href="/forgot-password" className={styles.forgot}>
         Forgot password?
-      </Button>
+      </Link>
 
       <div className={styles.submit}>
-        <Button type="submit">Log in</Button>
+        <Button type="submit" disabled={pending}>
+          {pending ? 'Logging in…' : 'Log in'}
+        </Button>
         <div role="status" className={styles.status}>
           {note ? <p>{note}</p> : null}
         </div>

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
  * Sign up (SCREENS.md section 3): name, email, password, nothing else. Business details
  * come from the website during setup, not from this form.
  *
- * FRONTEND ONLY: see SignUpForm. No account is created and nothing navigates to setup.
+ * Real sign-up: see SignUpForm and lib/auth/actions.
  */
 export default function SignUpPage() {
   return (
